@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://esromneb.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://esromneb.github.io/blog/" rel="alternate" type="text/html" hreflang="en-US" /><updated>2023-03-25T22:10:15-07:00</updated><id>https://esromneb.github.io/blog/feed.xml</id><title type="html">Ben Morse Blog</title><subtitle>My devblog. Typescript, Canvas, Phaser, Verilog, Startups.</subtitle><entry><title type="html">jest-and-jsverify-property-based-testing</title><link href="https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing" rel="alternate" type="text/html" title="jest-and-jsverify-property-based-testing" /><published>2023-03-25T00:00:00-07:00</published><updated>2023-03-25T00:00:00-07:00</updated><id>https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing</id><content type="html" xml:base="https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"><![CDATA[<h1 id="jest">Jest</h1>
+<!DOCTYPE html>
+<html lang="en-US"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>jest-and-jsverify-property-based-testing | Ben Morse Blog</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="jest-and-jsverify-property-based-testing" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Jest Is probably a framework you’ve used if you are a nodejs head." />
+<meta property="og:description" content="Jest Is probably a framework you’ve used if you are a nodejs head." />
+<link rel="canonical" href="https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing" />
+<meta property="og:url" content="https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing" />
+<meta property="og:site_name" content="Ben Morse Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-03-25T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="jest-and-jsverify-property-based-testing" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-25T00:00:00-07:00","datePublished":"2023-03-25T00:00:00-07:00","description":"Jest Is probably a framework you’ve used if you are a nodejs head.","headline":"jest-and-jsverify-property-based-testing","mainEntityOfPage":{"@type":"WebPage","@id":"https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"},"url":"https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://esromneb.github.io/blog/feed.xml" title="Ben Morse Blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ben Morse Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">jest-and-jsverify-property-based-testing</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2023-03-25T00:00:00-07:00" itemprop="datePublished">Mar 25, 2023
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="jest">Jest</h1>
 <p>Is probably a framework you’ve used if you are a <code class="language-plaintext highlighter-rouge">nodejs</code> head.</p>
 
 <h1 id="property-based-testing">Property Based Testing</h1>
@@ -62,10 +111,37 @@
   <span class="nx">expect</span><span class="p">(</span><span class="nx">jsc</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">props</span><span class="p">)).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
   
   <span class="nx">done</span><span class="p">();</span>
-<span class="p">});</span></code></pre></figure>]]></content><author><name></name></author><category term="programming" /><category term="TypeScript" /><category term="NodeJS" /><summary type="html"><![CDATA[Jest Is probably a framework you’ve used if you are a nodejs head.]]></summary></entry><entry><title type="html">Blog Notice</title><link href="https://esromneb.github.io/blog/gamedev/2023/03/11/hello-world.html" rel="alternate" type="text/html" title="Blog Notice" /><published>2023-03-11T00:00:00-08:00</published><updated>2023-03-11T00:00:00-08:00</updated><id>https://esromneb.github.io/blog/gamedev/2023/03/11/hello-world</id><content type="html" xml:base="https://esromneb.github.io/blog/gamedev/2023/03/11/hello-world.html"><![CDATA[<p>I guess this is a first post. The type of quality of posts you will see here will be absolute dirt-teir. Don’t expect working code or honestly anything. I guess I should copy the writing styles of other blogs and see if I can convey a cheery tone.</p>
+<span class="p">});</span></code></pre></figure>
 
-<p>Please reply on twitter and link here to the page you are talking about!!</p>
 
-<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">let</span> <span class="nx">base</span><span class="p">;</span>
-<span class="nx">base</span> <span class="o">=</span> <span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromEuler</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="dl">"</span><span class="s2">XYZ</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">base</span> <span class="o">=</span> <span class="nx">base</span><span class="p">.</span><span class="nx">mul</span><span class="p">(</span><span class="nx">Quaternion</span><span class="p">.</span><span class="nx">fromEuler</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">,</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="dl">"</span><span class="s2">XYZ</span><span class="dl">"</span><span class="p">));</span></code></pre></figure>]]></content><author><name></name></author><category term="gamedev" /><summary type="html"><![CDATA[I guess this is a first post. The type of quality of posts you will see here will be absolute dirt-teir. Don’t expect working code or honestly anything. I guess I should copy the writing styles of other blogs and see if I can convey a cheery tone.]]></summary></entry></feed>
+  </div><a class="u-url" href="/blog/jest-and-jsverify-property-based-testing" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Ben Morse Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Ben Morse Blog</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/esromneb"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg> <span class="username">esromneb</span></a></li><li><a href="https://www.twitter.com/benathon"><svg class="svg-icon"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">benathon</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>My devblog. Typescript, Canvas, Phaser, Verilog, Startups.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
