@@ -3,9 +3,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>jest-and-jsverify-property-based-testing | Ben Morse Blog</title>
+<title>Jest and JSVerify: Property Based Testing | Ben Morse Blog</title>
 <meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="jest-and-jsverify-property-based-testing" />
+<meta property="og:title" content="Jest and JSVerify: Property Based Testing" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Jest Is probably a framework you’ve used if you are a nodejs head." />
 <meta property="og:description" content="Jest Is probably a framework you’ve used if you are a nodejs head." />
@@ -15,9 +15,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2023-03-25T00:00:00-07:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="jest-and-jsverify-property-based-testing" />
+<meta property="twitter:title" content="Jest and JSVerify: Property Based Testing" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-25T00:00:00-07:00","datePublished":"2023-03-25T00:00:00-07:00","description":"Jest Is probably a framework you’ve used if you are a nodejs head.","headline":"jest-and-jsverify-property-based-testing","mainEntityOfPage":{"@type":"WebPage","@id":"https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"},"url":"https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-03-25T00:00:00-07:00","datePublished":"2023-03-25T00:00:00-07:00","description":"Jest Is probably a framework you’ve used if you are a nodejs head.","headline":"Jest and JSVerify: Property Based Testing","mainEntityOfPage":{"@type":"WebPage","@id":"https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"},"url":"https://esromneb.github.io/blog/jest-and-jsverify-property-based-testing"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://esromneb.github.io/blog/feed.xml" title="Ben Morse Blog" /></head>
 <body><header class="site-header" role="banner">
@@ -40,7 +40,7 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">jest-and-jsverify-property-based-testing</h1>
+    <h1 class="post-title p-name" itemprop="name headline">Jest and JSVerify: Property Based Testing</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2023-03-25T00:00:00-07:00" itemprop="datePublished">Mar 25, 2023
       </time></p>
@@ -48,13 +48,13 @@
 
   <div class="post-content e-content" itemprop="articleBody">
     <h1 id="jest">Jest</h1>
-<p>Is probably a framework you’ve used if you are a <code class="language-plaintext highlighter-rouge">nodejs</code> head.</p>
+<p>Is probably a framework you’ve used if you are a <code class="language-html highlighter-rouge">nodejs</code> head.</p>
 
 <h1 id="property-based-testing">Property Based Testing</h1>
 <p>This is an approach where your tests pulls random numbers during it’s operation. The seed is controlled by the library and failing tests will spit the seed as a string. I use <a href="https://www.npmjs.com/package/jsverify">jsverify</a>.  If you want this in C++ use <a href="https://github.com/emil-e/rapidcheck">rapidcheck</a>.</p>
 
 <h1 id="jest--jsverify">Jest + JSVerify</h1>
-<p>Imagine you previously wrote <code class="language-plaintext highlighter-rouge">workingFunction()</code> but it’s slow.  Now you want to replace it with <code class="language-plaintext highlighter-rouge">experimentalReplacementForOldWorkingFunction()</code> but aren’t sure if all possible inputs map out correctly. This is how I would “Bake in” a randomized test to make sure my new function was working.  Eventually after this test is passing, you refactor the old function name and just put the new body in there. Of course you would need now to save the old, slow version (so this test can exist). I normally put this in the test file in question. No need for a shared include or access from your runtime anymore.</p>
+<p>Imagine you previously wrote <code class="language-html highlighter-rouge">workingFunction()</code> but it’s slow.  Now you want to replace it with <code class="language-html highlighter-rouge">experimentalReplacementForOldWorkingFunction()</code> but aren’t sure if all possible inputs map out correctly. This is how I would “Bake in” a randomized test to make sure my new function was working.  Eventually after this test is passing, you refactor the old function name and just put the new body in there. Of course you would need now to save the old, slow version (so this test can exist). I normally put this in the test file in question. No need for a shared include or access from your runtime anymore.</p>
 
 <figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="c1">// works great</span>
 <span class="kd">function</span> <span class="nx">workingFunction</span><span class="p">(</span><span class="nx">vin</span><span class="p">:</span> <span class="nx">Vec4</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
