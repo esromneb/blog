@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Docker COPY command trick to save space" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Docker and Files Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the COPY or ADD commands without leaving behind a layer." />
-<meta property="og:description" content="Docker and Files Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the COPY or ADD commands without leaving behind a layer." />
+<meta name="description" content="Docker and Files Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the COPY or ADD commands without leaving behind a large and unwanted layer?" />
+<meta property="og:description" content="Docker and Files Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the COPY or ADD commands without leaving behind a large and unwanted layer?" />
 <link rel="canonical" href="https://esromneb.github.io/blog/docker-copy-file-trick" />
 <meta property="og:url" content="https://esromneb.github.io/blog/docker-copy-file-trick" />
 <meta property="og:site_name" content="Ben Morse Blog" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Docker COPY command trick to save space" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-12-10T00:00:00-08:00","datePublished":"2023-12-10T00:00:00-08:00","description":"Docker and Files Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the COPY or ADD commands without leaving behind a layer.","headline":"Docker COPY command trick to save space","mainEntityOfPage":{"@type":"WebPage","@id":"https://esromneb.github.io/blog/docker-copy-file-trick"},"url":"https://esromneb.github.io/blog/docker-copy-file-trick"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-12-10T00:00:00-08:00","datePublished":"2023-12-10T00:00:00-08:00","description":"Docker and Files Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the COPY or ADD commands without leaving behind a large and unwanted layer?","headline":"Docker COPY command trick to save space","mainEntityOfPage":{"@type":"WebPage","@id":"https://esromneb.github.io/blog/docker-copy-file-trick"},"url":"https://esromneb.github.io/blog/docker-copy-file-trick"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://esromneb.github.io/blog/feed.xml" title="Ben Morse Blog" /></head>
 <body><header class="site-header" role="banner">
@@ -48,31 +48,38 @@
 
   <div class="post-content e-content" itemprop="articleBody">
     <h1 id="docker-and-files">Docker and Files</h1>
-<p>Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the <code class="language-html highlighter-rouge">COPY</code> or <code class="language-html highlighter-rouge">ADD</code> commands without leaving behind a layer.</p>
+<p>Docker is great for setting up build environments. However if you are trying to make a docker with a pre-installed IDE or some other software, a problem emerges. How do you use the <code class="language-html highlighter-rouge">COPY</code> or <code class="language-html highlighter-rouge">ADD</code> commands without leaving behind a large and unwanted layer?</p>
 
-<h1 id="layers-to-the-rescue">Layers to the rescue</h1>
+<h1 id="multi-stage-builds-to-the-rescue">Multi-stage builds to the rescue</h1>
+
+<p>Use this approach to save space and avoid any trace of the large <code class="language-html highlighter-rouge">.tar.gz</code> file in the history of your Docker.</p>
 
 <pre><code class="language-Docker">FROM ubuntu:jammy-20230308 as builder
 
+# copy large file in
 COPY CCS12.5.0.00007_linux-x64.tar.gz /opt/CCS12.5.0.00007_linux-x64.tar.gz
 
+# Do any extraction work
 RUN cd /opt &amp;&amp; tar -xf CCS12.5.0.00007_linux-x64.tar.gz
 
 ###############################################################################
 FROM ubuntu:jammy-20230308 as final
 
+# Copy the extracted folder only
 COPY --from=builder /opt/CCS12.5.0.00007_linux-x64 /opt/CCS12.5.0.00007_linux-x64
 
 # And the rest of your docker file as normal
 </code></pre>
 
 <h1 id="results">Results</h1>
-<p>A temporary docker, called <code class="language-html highlighter-rouge">builder</code> is created. The <code class="language-html highlighter-rouge">COPY</code> command is used here (which must leave behind a layer). Then the contents are untarred.  In this step you can do any additional setup that is required only for acquiring the install files. Then, in <code class="language-html highlighter-rouge">final</code>, you only copy over the extracted folder. Note that you don’t need to delete the <code class="language-html highlighter-rouge">tar</code>, as all layers from <code class="language-html highlighter-rouge">builder</code> are automatically deleted.</p>
+<p>A temporary docker stage, called <code class="language-html highlighter-rouge">builder</code> is created. The <code class="language-html highlighter-rouge">COPY</code> command is used here (which always leaves behind a layer). Then the contents are untarred. In this step you can do any additional steps that are required. Then, in <code class="language-html highlighter-rouge">final</code>, you only copy over the extracted folder. Note that you don’t need to delete the <code class="language-html highlighter-rouge">tar.gz</code>, as all layers from <code class="language-html highlighter-rouge">builder</code> are automatically deleted.</p>
 
 <h1 id="further-background">Further Background</h1>
 <p>The problem where <code class="language-html highlighter-rouge">COPY</code> and <code class="language-html highlighter-rouge">ADD</code> leave behind a layer is a significant one. Similar to <code class="language-html highlighter-rouge">git</code>, each layer that is left behind is a permanent record in the history of your docker. What this means is that if you create a large file in one layer, and then in the next layer you delete it, the docker’s size will permanently be larger, despite the deletion.</p>
 
 <p>A new layer is created every time you have a new <code class="language-html highlighter-rouge">RUN</code> statement. You will often see tips online where you create a large, file, operate with it, and then delete it all within the same <code class="language-html highlighter-rouge">RUN</code> command. This approach works great if the file comes in via <code class="language-html highlighter-rouge">wget</code>, however the trick I’ve mentioned above is best if the source of the file is from <code class="language-html highlighter-rouge">COPY</code> or <code class="language-html highlighter-rouge">ADD</code>.</p>
+
+<p>An additional optimization would be to run the full installation in the build stage, and only copy the final, installed files in the <code class="language-html highlighter-rouge">final</code> stage.</p>
 
   </div><a class="u-url" href="/blog/docker-copy-file-trick" hidden></a>
 </article>
